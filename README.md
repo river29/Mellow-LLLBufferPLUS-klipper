@@ -461,3 +461,158 @@ Special thanks to:
 ## License
 
 MIT License - Feel free to use and modify!
+
+
+
+
+
+# ADD MDM Module Clog Detection
+Feature Introduction
+The FLY-LLL PLUS Buffer can be used in conjunction with the FLY-MDM Filament Runout/Clog Sensor to achieve real-time monitoring and automatic handling of extruder clog conditions.
+
+Core Features
+Clog Detection: The MDM module monitors the buffer's filament status to detect clogs.
+Unified Runout/Clog Handling: Filament runout detection is also handled by the MDM module, with signals sent via the buffer.
+Important Note: When using the MDM module, all filament runout/clog detection signals are sent to the mainboard via the buffer. The mainboard cannot distinguish whether the signal originates from a runout or a clog.
+
+Firmware Requirements
+The buffer firmware version must be V1.1.5 or higher.
+Hardware Wiring
+1. MDM Module to Buffer Connection
+The MDM module communicates directly with the buffer to detect clog status:
+
+MDM Module to Buffer Connection Diagram
+2. Buffer to Mainboard Connection
+The mainboard sends signals to the buffer.
+
+Buffer Signal Forwarding Wiring Diagram
+3. Buffer Filament Runout Detection Wiring
+The buffer's filament runout detection must be connected to the mainboard; otherwise, it will not function properly.
+
+
+Specific Connection Method:
+
+Buffer Pin	Function Description	Connection Suggestion
+STEP	Extruder Stepper Signal Monitoring	Connect to a free PWM, RGB, or 12864 interface on the mainboard.
+DIR	Extruder Direction Signal Monitoring	Connect to a free limit switch interface on the mainboard.
+Tip: The servo port of a BL-Touch can also be used for STEP signal monitoring.
+
+Klipper Configuration
+Pre-configuration Preparation
+Before adding the MDM module configuration, ensure the following are correctly configured:
+
+Basic extruder configuration
+Basic buffer functionality configuration
+Note: Filament runout detection now follows the path: MDM module → Buffer → Mainboard.
+1. Buffer Monitor Configuration (for Clog Detection)
+Add the following configuration to your Klipper configuration file (e.g., printer.cfg) to monitor extruder status:
+
+ [extruder_stepper buffer_monitor]
+ extruder: extruder           # Name of the associated main extruder
+ step_pin: PE10               # Replace with the actual pin connected to buffer PA5
+ dir_pin: PD4                 # Replace with the actual pin connected to buffer PB11
+ rotation_distance: 17.472    # Replace with your extruder's actual value
+ gear_ratio: 50:10            # Replace with your extruder's actual gear ratio
+ microsteps: 16               # Replace with your extruder's actual microstep setting
+full_steps_per_rotation: 200 # Standard stepper motor is 200 steps/revolution
+
+Complete Configuration Example
+# Main Extruder Configuration
+ [extruder]
+ step_pin: PB13
+ dir_pin: PB12
+ enable_pin: !PB14
+ microsteps: 16
+ rotation_distance: 17.472
+ gear_ratio: 50:10
+ nozzle_diameter: 0.4
+ filament_diameter: 1.75
+ heater_pin: PA1
+ sensor_type: ATC Semitec 104GT-2
+ sensor_pin: PC1
+ control: pid
+ pid_Kp: 21.527
+ pid_Ki: 1.063
+ pid_Kd: 108.982
+ min_temp: 0
+ max_temp: 280
+
+[extruder_stepper buffer_monitor]
+extruder: extruder
+step_pin: PE10      # Connected to buffer PA5
+dir_pin: PD4        # Connected to buffer PB11
+rotation_distance: 17.472
+gear_ratio: 50:10
+microsteps: 16
+full_steps_per_rotation: 200
+
+[filament_switch_sensor Material_breakage_detection]
+pause_on_runout: true
+switch_pin: ^PA0   # Please replace with the pin you actually use
+runout_gcode:
+    PAUSE
+    RESPOND MSG="Filament runout detected, print paused"
+insert_gcode:
+    RESPOND MSG="Filament inserted, preparing to resume print"
+event_delay: 2.0    # Event trigger delay (seconds)
+pause_delay: 2.0     # Pause command delay (seconds)
+debounce_delay: 2.0  # Debounce delay (seconds)
+
+Buffer Configuration
+Important Notes
+If the extruder configuration does not have gear_ratio, change both Driver Gear Number and Driven Gear Number to 1.
+Stepper Parameter Calculator
+200
+Steps per motor revolution
+16
+Driver microstepping
+22
+Travel distance per revolution (mm)
+1
+Driver gear teeth count
+1
+Driven gear teeth count
+145,455
+Pulses per mm (step/mm)
+Parameter Description
+Function Description	Configuration Command (Please input in the serial tool)	Default Value	Unit	Remarks
+View all current parameters	
+info
+-	-	Send the command to read all current configurations.
+Set motor pulse count	
+steps 145.455
+916	-	Set the number of pulses required for the motor to move per millimeter.
+Set encoder detection distance	
+encoder 1.73
+1.73	mm	Set the filament movement distance represented by each encoder signal.
+Set operation timeout	
+timeout 60000
+60000	ms	Set the automatic stop time when no trigger is detected to prevent continuous extrusion.
+Set error scaling factor	
+scale 2.0
+2.0	-	Allowable Error = encoder value X scale value.
+Example: 1.73 * 2.0 = 3.46 mm
+Set speed control command	
+speed 260
+260	mm	Set the buffer running speed, maximum 600 (rpm). Firmware needs to be updated to V1.1.1.
+Operation Notes:
+
+Command Format: In the "Configuration Command" column of the table above, the entire line of command (e.g., steps 916) is the content that needs to be entered in full.
+Sending Method: After entering the command in the send area of the serial assistant, click the Send button.
+Automatic Save: After the command is sent successfully, the parameters take effect immediately and are saved automatically. No additional save operation is required.
+Confirm Configuration: After modifying any parameter, you can send the info command to query all current parameters to verify if the configuration is correct.
+Important Notes
+After remembering the set parameters, you can configure the buffer via the link below.
+Buffer Configuration
+Functionality Testing
+1. Connection Test
+Complete the connection between the MDM module and the buffer.
+Complete the signal wire connection between the buffer and the mainboard.
+Verify all connections are secure.
+2. Full Process Test
+Start a test print.
+Simulate a clog condition (operate with care).
+Observe:
+Whether the MDM module detects the issue.
+Whether the buffer forwards the signal.
+Whether the mainboard receives the signal.
