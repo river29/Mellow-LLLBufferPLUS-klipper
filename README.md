@@ -481,6 +481,9 @@ Hardware Wiring
 1. MDM Module to Buffer Connection
 The MDM module communicates directly with the buffer to detect clog status:
 
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](mdm.webp)
+
+
 MDM Module to Buffer Connection Diagram
 2. Buffer to Mainboard Connection
 The mainboard sends signals to the buffer.
