@@ -636,22 +636,22 @@ Whether the mainboard receives the signal.
      PB14       == FIL MOTION
 
 
-      5V        ==
-      GND       ==
-      PA4       ==
-      PA5       ==                                            GND    ==
-      PB10      ==             (entrée signal avance) FEEDING PB5    ==
-      PB11      ==            
-                                                                     ==
-      GND       ==                                                   ==
-      PA2       ==                                                   ==
-      PA3       ==
-                                                           GND       ==
-                   ==        (entrée signal retrait) RETRACT PB6     ==
-                   ==                                                 
-                                                                     ==
-                                                                     ==
-                                                                     ==
+                == 5V
+                == GND
+                == PA4
+                == PA5                                           GND == --|- ENDSTOP1
+                == PB10           (entrée signal avance) FEEDING PB5 == --|
+                == PB11           
+                                                                     == --|
+                == GND                                               ==   |- ENDCODE2
+                == PA2                                               == --|
+                == PA3
+                                                           GND       == --|- ENDSTOP2
+ENDSTOP3  -|--  ==         (entrée signal retrait) RETRACT PB6       == --|
+           |--  ==                                                 
+                                                                     == --|
+                                                                     ==   |- ENDCODE1
+                                                                     == --|
 
 
 ## MDM
