@@ -628,8 +628,52 @@ Whether the mainboard receives the signal.
 
 ![pinout LLL](lll-plus-pinout.avif)
 
+
+
+     +12/24V    ==
+     GND        ==
+     PB15       == FIL SWITCH
+     PB14       == FIL MOTION
+
+
+      5V        ==
+      GND       ==
+      PA4       ==
+      PA5       ==
+      PB10      ==
+      PB11      ==
+
+      GND       ==
+      PA2       ==
+      PA3       ==
+
+     
+  
 ## MDM
  
 ![wiring MDM](wiring-MDM.webp)
 
 ![wiring MDM 2t](wiring-MDM2.webp)
+
+
+# WIRING
+
+ SV08                     LLL PLUS             MDM
+
+ USB       ====KLIPPER==== USB C
+ 
+ +24V Sv08 =============== 12/24V
+ GND SV08  =============== GND
+                           PB15
+                           PB14
+
+                           5V    =============== + + 5V
+                           GND   =============== - GND
+                           PA4   =============== D
+                           PA5 
+                           PB10  =============== S
+                           PB11
+                           GND
+                           PA2
+                           PA3
+ 
