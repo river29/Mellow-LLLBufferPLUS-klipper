@@ -640,8 +640,8 @@ Whether the mainboard receives the signal.
       GND       ==
       PA4       ==
       PA5       ==
-      PB10      ==
-      PB11      ==
+      PB10      ==            PB5 (entrée signal avance) FEEDING
+      PB11      ==            PB6 (entrée signal retrait) RETRACT
 
       GND       ==
       PA2       ==
@@ -670,7 +670,7 @@ Whether the mainboard receives the signal.
                            5V    =============== + + 5V
                            GND   =============== - GND
                            PA4   =============== D
-                           PA5 
+                           PA5                               
                            PB10  =============== S
                            PB11
                            GND
