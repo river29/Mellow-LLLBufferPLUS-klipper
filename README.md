@@ -624,10 +624,10 @@ Whether the mainboard receives the signal.
 
 # pinOUT
 
-# LLL PLus
+## LLL PLus
 
- # MDM
+## MDM
+ 
+![wiring MDM](wiring MDM.webp)
 
- ![wiring MDM](wiring MDM.webp)
-
- ![wiring MDM 2t](wiring MDM2.webp)
+![wiring MDM 2t](wiring MDM2.webp)
