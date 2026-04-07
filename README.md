@@ -458,9 +458,8 @@ Special thanks to:
 - [Arksine](https://github.com/Arksine) for Katapult bootloader
 - [Klipper](https://github.com/Klipper3d/klipper) team
 
-## License
 
-MIT License - Feel free to use and modify!
+
 
 
 
@@ -481,7 +480,7 @@ Hardware Wiring
 1. MDM Module to Buffer Connection
 The MDM module communicates directly with the buffer to detect clog status:
 
-![Calage MDM sur LLL Plus (flasher lll Plus avant](mdm.webp)
+![Calage MDM sur LLL Plus (flasher lll Plus avant](lllplus-mdm-wiring-clog.webp)
 
 
 MDM Module to Buffer Connection Diagram
@@ -619,3 +618,16 @@ Observe:
 Whether the MDM module detects the issue.
 Whether the buffer forwards the signal.
 Whether the mainboard receives the signal.
+
+
+
+
+# pinOUT
+
+# LLL PLus
+
+ # MDM
+
+ ![Calage MDM sur LLL Plus (flasher lll Plus avant](mdm.webp)
+
+ ![Calage MDM sur LLL Plus (flasher lll Plus avant](mdm.webp)
