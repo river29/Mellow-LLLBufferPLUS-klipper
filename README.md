@@ -627,7 +627,13 @@ Whether the mainboard receives the signal.
 ## LLL PLus
 
 ![pinout LLL](lll-plus-pinout.avif)
-
+				引脚：
+				HALL1 --> PB2 (光感3)
+				HALL2 --> PB3 (光感2)
+				HALL3 --> PB4 (光感1)
+				ENDSTOP_3 --> PB7(耗材开关)
+				KEY1 --> PB13(后退)	
+				KEY2 --> PB12(前进)
 
 
      +12/24V    ==
