@@ -639,16 +639,21 @@ Whether the mainboard receives the signal.
       5V        ==
       GND       ==
       PA4       ==
-      PA5       ==                                          GND       ==
-      PB10      ==            PB5 (entrée signal avance) FEEDING      ==
+      PA5       ==                                            GND    ==
+      PB10      ==             (entrée signal avance) FEEDING PB5    ==
       PB11      ==            
-                                                                      ==
-      GND       ==                                                    ==
-      PA2       ==                                                    ==
+                                                                     ==
+      GND       ==                                                   ==
+      PA2       ==                                                   ==
       PA3       ==
-                                                           GND        ==
-                           PB6 (entrée signal retrait) RETRACT        ==
-  
+                                                           GND       ==
+                   ==        (entrée signal retrait) RETRACT PB6     ==
+                   ==                                                 
+                                                                     ==
+                                                                     ==
+                                                                     ==
+
+
 ## MDM
  
 ![wiring MDM](wiring-MDM.webp)
