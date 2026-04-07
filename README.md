@@ -628,6 +628,6 @@ Whether the mainboard receives the signal.
 
  # MDM
 
- ![Calage MDM sur LLL Plus (flasher lll Plus avant](mdm.webp)
+ ![wiring MDM](wiring MDM.webp)
 
- ![Calage MDM sur LLL Plus (flasher lll Plus avant](mdm.webp)
+ ![wiring MDM 2t](wiring MDM2.webp)
