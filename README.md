@@ -628,6 +628,6 @@ Whether the mainboard receives the signal.
 
 ## MDM
  
-![wiring MDM](wiring MDM.webp)
+![wiring MDM](wiring-MDM.webp)
 
-![wiring MDM 2t](wiring MDM2.webp)
+![wiring MDM 2t](wiring-MDM2.webp)
