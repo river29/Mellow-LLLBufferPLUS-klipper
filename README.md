@@ -626,6 +626,8 @@ Whether the mainboard receives the signal.
 
 ## LLL PLus
 
+![pinout LLL](lll-plus-pinout.avif)
+
 ## MDM
  
 ![wiring MDM](wiring-MDM.webp)
