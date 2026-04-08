@@ -688,3 +688,76 @@ ENDSTOP3  -|--  ==         (entrée signal retrait) RETRACT PB6       == --|
                            PA2
                            PA3
  
+
+
+
+
+# Modification Klipper module BufferStepper
+
+Un module klipper existant à été trouvé.
+
+Etant donné que le module était codé pour fonctionner uniquement avec un module EBb (mcu appelé EBB), je l'ai modifié (avecl'aide de claude) pour matcher avec n'importe quel MCU.
+
+copier/ coller le module buffer_stepper.py dans le dossier klipper/klippy/extras et ajouter le code suivant dans les fichiers de config klipper : 
+
+ 
+# https://github.com/river29/Mellow-LLLBufferPLUS-klipper/blob/add-MDM-Module-Clog-Detection/printer_data/config/mellow-plus.cfg
+
+
+# https://mellow.klipper.cn/en/docs/ProductDoc/ExtensionBoard/fly-buffer-plus/wiring-configuration/mdm-module-integration
+
+#####################################################################
+#                  Mellow LLL Filament Plus Buffer
+#####################################################################
+
+[mcu LLL_PLUS]
+serial: /dev/serial/by-id/usb-Klipper_stm32f072xb_30003A000D53575438363820-if00
+restart_method: command
+
+
+
+# [temperature_sensor LLL_PLUS_Temp]
+# sensor_type: temperature_mcu
+# sensor_mcu: LLL_PLUS
+
+[duplicate_pin_override]
+pins: LLL_PLUS:temperature_mcu
+#   A comma separated list of pins that may be used multiple times in
+#   a config file without normal error checks. This parameter must be
+#   provided.
+
+
+[temperature_sensor LLL_PLUS_Temp]
+sensor_type: temperature_mcu
+sensor_mcu: LLL_PLUS
+
+
+[buffer_stepper filament_buffer]
+#   the Buffer stepper requires to using an seperate mcu from normal printer kinematics and extruder.
+#   Currently the mcu has to be named as "LLL_PLUS"
+#   Gcode Command: "Buffer_STEPPER STEPPER=filament_buffer MOVE=10"
+mcu_name: LLL_PLUS        # ← nom du MCU déclaré dans [mcu LLL_PLUS]
+step_pin: LLL_PLUS: PA9
+dir_pin: !LLL_PLUS: PA8
+enable_pin: !LLL_PLUS :PA10
+microsteps: 16
+rotation_distance: 40
+velocity: 200
+accel: 5000
+#   refer to Manual Stepper settings. Default values are the same.
+push_length: 35
+#push length when endstop triggered
+full_steps_per_rotation:932  #set to 400 for 0.9 degree stepper, 932 for H2 extruder
+endstop_pin: !LLL_PLUS: PB6
+#   The pin which use to trigger the stepper
+#   This parameter must be provided
+
+
+[tmc2209 buffer_stepper filament_buffer]
+uart_pin: LLL_PLUS: PA13
+interpolate: True
+run_current: 0.40
+hold_current: 0.001
+sense_resistor: 0.110
+stealthchop_threshold: 500
+
