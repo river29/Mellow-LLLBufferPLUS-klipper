@@ -669,7 +669,7 @@ ENDSTOP3  -|--  ==         (entrée signal retrait) RETRACT PB6       == --|
 
 # WIRING
 
- SV08                     LLL PLUS             MDM
+ SV08                     LLL PLUS             MDM                 AFC bypass
 
  USB       ====KLIPPER==== USB C
  
@@ -683,9 +683,9 @@ ENDSTOP3  -|--  ==         (entrée signal retrait) RETRACT PB6       == --|
                            PA4   =============== D
                            PA5                               
                            PB10  =============== S
-                           PB11
-                           GND
-                           PA2
+                           PB11  
+                           GND   ===================================
+                           PA2   =================================== Signal bypass
                            PA3
  
 
